@@ -1,0 +1,151 @@
+@use './Variables';
+
+.header {
+  display: flex;
+  padding: 4rem;
+  color: Variables.$text-color;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.main-logo:is(:link, :visited) {
+  font-size: 2.8rem;
+  text-decoration: none;
+  font-weight: 700;
+  color: inherit;
+}
+
+.main-nav {
+  &-list {
+    // "UL" tag contains nav items
+    list-style-type: none;
+    display: flex;
+    font-size: 1.8rem;
+    font-weight: 600;
+    gap: 0.8rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-link:is(:link, :visited) {
+    // Nav items
+    display: inline-block;
+    padding: 0.8rem 1.4rem;
+    border-radius: 1rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 200ms;
+  }
+}
+
+.nav-btn:is(:link, :visited) {
+  // It's also an "main-nav-link"
+  // but it's a different type of "main-nav-link" (cta button)
+
+  padding: 0.8rem 2rem;
+  background-color: Variables.$cta-color;
+  margin-left: 2rem;
+}
+
+.burger-button {
+  display: none;
+  // it's hidden on the big screens
+
+  justify-content: center;
+  align-items: center;
+
+  width: 5rem;
+  height: 5rem;
+
+  border-radius: 50%;
+  border: none;
+  background-color: #e8e8e8da;
+
+  cursor: pointer;
+  transition: 300ms all;
+
+  &:active {
+    transform: scale(0.75);
+    // smaller after click
+  }
+}
+
+.burger-icon {
+  stroke: Variables.$text-color;
+  width: 2.4rem;
+  height: 2.4rem;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .main-nav-link:hover,
+  .burger-button:hover {
+    background-color: Variables.$brand-color;
+
+    box-shadow: 0 0.2rem 1rem
+      rgba($color: Variables.$cta-color, $alpha: 40%);
+  }
+}
+
+.main-nav-link:active {
+  background-color: Variables.$brand-color;
+  transform: scale(0.9);
+
+  box-shadow: 0 0.2rem 0.5rem
+    rgba($color: Variables.$cta-color, $alpha: 40%);
+}
+
+////////////////////////////////////////////////////////////////////
+
+// Media Queries :
+@media screen and (max-width: 60em) {
+  .burger-button {
+    display: flex;
+    z-index: 2;
+  }
+
+  .nav-btn:link,
+  .nav-btn:visited {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+
+  .main-nav {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    transform: translateX(100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #ffffffd9;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+
+    transition: all 400ms ease-in;
+
+    &-list {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    &-link:is(:link, :visited) {
+      padding: 1.4rem 1.2rem;
+    }
+  }
+
+  .open-menu {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    transform: translateX(0);
+  }
+}
