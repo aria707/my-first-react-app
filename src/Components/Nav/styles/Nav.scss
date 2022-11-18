@@ -79,8 +79,7 @@
 }
 
 @media (hover: hover) {
-  .main-nav-link:hover,
-  .burger-button:hover {
+  :is(.main-nav-link, .burger-button):hover {
     background-color: Variables.$brand-color;
 
     box-shadow: 0 0.2rem 1rem
@@ -99,14 +98,15 @@
 ////////////////////////////////////////////////////////////////////
 
 // Media Queries :
-@media screen and (max-width: 60em) {
+
+// 🔴 70em => 1120px
+@media screen and (max-width: 70em) {
   .burger-button {
     display: flex;
     z-index: 2;
   }
 
-  .nav-btn:link,
-  .nav-btn:visited {
+  .nav-btn:is(:link, :visited) {
     margin-left: 0;
     margin-top: 1rem;
   }
