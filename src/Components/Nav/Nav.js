@@ -12,7 +12,6 @@ const Nav = ({
   ctaButtonLabel = 'Sign Up',
 }) => {
   const [isMobileNavMenuOpen, setState] = useState(false);
-  // We pass 'isMobileNavMenuOpen' to '<NavItems />' as a prop
 
   const burgerButtonClickHandler = () =>
     setState(prevState => !prevState);
@@ -30,7 +29,10 @@ const Nav = ({
         isMobileNavMenuOpen={isMobileNavMenuOpen}
         onClick={navItemsClickHandler}
       />
-      <BurgerButton onClick={burgerButtonClickHandler} />
+      <BurgerButton
+        isMobileNavMenuOpen={isMobileNavMenuOpen}
+        onClick={burgerButtonClickHandler}
+      />
     </header>
   );
 };
